@@ -1,0 +1,26 @@
+.main{
+    display: block;
+    margin: auto;
+    width: 800px;
+    margin-left: 50px;
+}
+
+.email, .password, .confirm{
+    margin-left: 66px;
+}
+
+.labE{
+    margin-right: 42px;
+}
+.labP{
+    margin-right: 75px;
+}
+
+.labC{
+    margin-right: 12px;
+}
+
+.button{
+    margin-top: 10px;
+    margin-left: 20px;
+}
