@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { Link, navigate} from '@reach/router';
+
 
 const ProductForm = (props) =>{
     const [title, setTitle] = useState('');
@@ -17,8 +19,19 @@ const ProductForm = (props) =>{
           .catch(err=>console.log(err))
   }
 
+  useEffect(()=>{
+    axios.get("http://localhost:8000/api/products")
+    .then(res => {
+        console.log("logging response!!", res)
+        setProduct(res.data.results)
+    
+    })
+    .catch(err=> console.log("errorrr with axios call", err))
+}, [])
+
 
     return (
+      <>
         <form onSubmit={ createProduct }>
         <div class="form-group row">
           <label for="colFormLabel" class="col-sm-2 col-form-label">Title: </label>
@@ -37,6 +50,17 @@ const ProductForm = (props) =>{
         
         <button type="submit" class="btn btn-primary">Create</button>
       </form>
+
+      <div>
+        <h1>All Products: </h1>
+        {product.map(p=>{
+          let link = `/product/${p._id}`
+          return<div>
+            <Link to={link}> {p.title}</Link>
+            </div>
+        })}
+        </div>
+      </>
     )
 }
 

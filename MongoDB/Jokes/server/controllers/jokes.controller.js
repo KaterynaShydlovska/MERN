@@ -39,13 +39,9 @@ module.exports.deleteJoke = (req, res) => {
 }
 
 module.exports.findRandomJoke =(req, res) =>{
-    console.log("find all function")
     Joke.find()
     .then(findAllJokes => {
-        console.log(findAllJokes, '-------')
         let randNum = Math.floor(Math.random() * findAllJokes.length);
-        console.log(randNum, "randomNumber")
-        console.log(findAllJokes[randNum], "random joke")
         res.json({results: findAllJokes[randNum]})
     })
     .catch(err=> res.json({message: "that didnt work", error: err}))

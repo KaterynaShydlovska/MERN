@@ -12,3 +12,10 @@ module.exports.createProduct = (req, res) =>{
     .then(newProduct => res.json({joke: newProduct}))
     .catch(err=> res.json({message: "that didnt work", error: err}))
 }
+
+module.exports.getOneProduct = (req, res) => {
+    console.log(req.params)
+    Product.findOne({ _id: req.params._id })
+        .then(oneSingleProduct => res.json({ product: oneSingleProduct }))
+        .catch(err => res.json({ message: 'Test', error: err }));
+}
