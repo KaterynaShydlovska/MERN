@@ -19,3 +19,21 @@ module.exports.getOneProduct = (req, res) => {
         .then(oneSingleProduct => res.json({ product: oneSingleProduct }))
         .catch(err => res.json({ message: 'Test', error: err }));
 }
+
+module.exports.updateOneProduct = (req, res) =>{
+
+    console.log("\n", req.body, "request", "\n")
+
+    Product.findOneAndUpdate({ _id: req.params._id },
+        req.body,
+        { new: true, runValidators: true }
+    )
+    .then(updateProduct => {return res.json({product: updateProduct})})
+    .catch( err => res.json({message: "Something went wrong with update product", error: err}))
+}
+
+module.exports.deleteOneProduct = (req, res) =>{
+    Product.deleteOne({_id: req.params._id})
+    .then(result => res.json({result: result}))
+    .catch(err => res.json({message: "Can't delete this product", error: err}))
+}
